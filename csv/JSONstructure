@@ -1,0 +1,22 @@
+{
+"expand":"operations,versionedRepresentations,editmeta,changelog,renderedFields",
+"self":"https://issues.apache.org/jira/rest/api/2/issue/12753243",
+"id":"12753243",
+"fields":
+	{
+	"versions":
+		[{
+		"archived":false,
+		"releaseDate":"2014-12-04",
+		"name":"0.6",
+		"self":"https://issues.apache.org/jira/rest/api/2/version/12326828",
+		"description":"Dashboard, Authorization, etc.",
+		"id":"12326828",
+		"released":true
+		}],
+	"resolutiondate":"2014-11-06T01:06:54.000+0000",
+	"created":"2014-11-06T00:40:25.000+0000"
+	},
+"key":"FALCON-867"
+}
+
