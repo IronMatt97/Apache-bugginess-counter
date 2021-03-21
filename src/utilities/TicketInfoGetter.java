@@ -8,23 +8,21 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TicketInfoGetter 
 {
-	public static Integer[][] getInfo(String projName) throws IOException, JSONException
-	{
-		
-	    Integer j = 0, i = 0, total = 1;
-	    Integer monthcounter[][] = new Integer[6][12];
-	    for(int l=0;l<6;l++) 
+	public static Integer[][] getInfo(String projName)
+	{		
+	    Integer j = 0, i = 0, total = 1, r, c;
+	    Integer ticketPerMonthCounter[][] = new Integer[6][12];
+	    for(r=0;r<6;r++) 
 	    {
-	    	for(int f=0;f<12;f++)
+	    	for(c=0;c<12;c++)
 	    	{
-	    		monthcounter[l][f]=0;
+	    		ticketPerMonthCounter[r][c]=0;
 	    	}
 	    }
 	    do 
@@ -34,39 +32,54 @@ public class TicketInfoGetter
 	    			+ projName + "%22AND(%22status%22=%22closed%22OR"
 	    			+ "%22status%22=%22resolved%22)AND%22resolution%22=%22fixed%22&fields=key,resolutiondate,versions,created&startAt="
 	    			+ i.toString() + "&maxResults=" + j.toString();
-	    	JSONObject json = readJsonFromUrl(url);
-	    	JSONArray issues = json.getJSONArray("issues");
-	    	total = json.getInt("total");
-	    	for (; i < total && i < j; i++) 
+	    	try
 	    	{
-	    		String key = issues.getJSONObject(i%1000).get("key").toString();
-	    		String resDate = issues.getJSONObject(i%1000).getJSONObject("fields").getString("resolutiondate");
-	    		String date = resDate.substring(0,16);
-	    		LocalDateTime dateTime = LocalDateTime.parse(date);
-	    		monthcounter[dateTime.getYear()-2013][dateTime.getMonthValue()-1] ++;
-	    		//System.out.println(key + "   " + dateTime.getYear());
-	    		/*
-	    		 * QUI OTTENGO L'INFO
-	    		 */
-	    	}  
+	    		JSONObject json = readJsonFromUrl(url);
+	    		JSONArray issues = json.getJSONArray("issues");
+	    		total = json.getInt("total");
+	    		for (; i < total && i < j; i++) 
+	    		{
+	    			String resDate;
+					resDate = issues.getJSONObject(i%1000).getJSONObject("fields")
+							.getString("resolutiondate").substring(0,16);
+				
+					LocalDateTime dateTime = LocalDateTime.parse(resDate);
+					ticketPerMonthCounter[dateTime.getYear()-2013][dateTime.getMonthValue()-1] ++;
+	    		}
+	    	} 
+	    	catch (JSONException e) 
+	    	{
+				System.out.println("Error during JSON document analysis.");
+				e.printStackTrace();
+			} 
+	    	catch (IOException e) 
+	    	{
+	    		System.out.println("Error reading JSON file.");
+				e.printStackTrace();
+			}
 	    } 
 	    while (i < total);
-	    //Stampo la matrice dei ticket per mese
-	    System.out.println("\t\t\t\t\t   MATRICE DEI FIXED ISSUES AL MESE");
-	    System.out.println("\t\tGen\tFeb\tMar\tApr\tMag\tGiu\tLug\tAgo\tSet\tOtt\tNov\tDic");
+	    
+	    printMat(ticketPerMonthCounter);
+	    
+	    return ticketPerMonthCounter;
+	}
+	
+	private static void printMat(Integer[][] m)
+	{
+		System.out.println("\t\t\t\t\t   Fixed issues per month\n");
+	    System.out.println("\t\tJan\tFeb\tMar\tApr\tMay\tJun\tJul\tAug\tSep\tOct\tNov\tDec");
 	    int k=0;
-	    for(int a=0;a<6;a++) 
+	    for(int i=0;i<6;i++) 
 	    {
-	    	System.out.print("ANNO "+(k+2013)+"\t");
-	    	for(int b=0;b<12;b++)
+	    	System.out.print("Year "+(k+2013)+"\t");
+	    	for(int j=0;j<12;j++)
 	    	{
-	    		System.out.print(monthcounter[a][b]+"\t");
+	    		System.out.print(m[i][j]+"\t");
 	    	}
 	    	System.out.println("");
 	    	k++;
 	    }
-	    
-	    return monthcounter;
 	}
 
 	private static String readAll(Reader rd) throws IOException 

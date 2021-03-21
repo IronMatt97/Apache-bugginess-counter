@@ -1,3 +1,5 @@
+Lo scopo di questo file è analizzare la struttura del dato che ottengo dal JSON al fine di ottenere ciò che mi serve, ovvero la resolution date.
+
 {
 "expand":"operations,versionedRepresentations,editmeta,changelog,renderedFields",
 "self":"https://issues.apache.org/jira/rest/api/2/issue/12753243",
