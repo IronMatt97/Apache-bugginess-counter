@@ -6,12 +6,13 @@ import utilities.TicketInfoGetter;
 
 public class IssueCounter 
 {
+	//Metodo che restituisce il CSV da cui realizzare il process control chart.
 	public static void generateCSV(String project_name,String csv_path)
 	{
 	    String[] months= {"January","February","March","April","May","June","July",
 	    		"August","September","October","November","Decembrer"};
 	    String[] years= {"2013","2014","2015","2016","2017","2018"};
-		
+		//Ottieni una matrice contenente i fixed tickets per mese
 	    Integer data[][]=TicketInfoGetter.getInfo(project_name);
 		FileWriter fileWriter = null;
 		try 
@@ -19,6 +20,7 @@ public class IssueCounter
 			fileWriter = null;
 		    String outname = csv_path +"Project"+project_name+"TicketDatas.csv";
 		    fileWriter = new FileWriter(outname);
+		    //Scrivo il file CSV, riportando i mesi ed il numero di ticket risolti
 		    fileWriter.append("Months;Fixed tickets\n");
 		    for ( int r = 0; r < 6; r++) 
 		    {

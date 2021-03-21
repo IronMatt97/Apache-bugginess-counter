@@ -18,6 +18,7 @@ public class TicketInfoGetter
 	{		
 	    Integer j = 0, i = 0, total = 1, r, c;
 	    Integer ticketPerMonthCounter[][] = new Integer[6][12];
+	    //Inizializzo i  contatori dei ticket nella matrice, tutti a 0.
 	    for(r=0;r<6;r++) 
 	    {
 	    	for(c=0;c<12;c++)
@@ -39,10 +40,11 @@ public class TicketInfoGetter
 	    		total = json.getInt("total");
 	    		for (; i < total && i < j; i++) 
 	    		{
+					//Preleva dal JSON la resolution date del ticket, trasformala in formato data
+					//per poi sommare uno al contatore dei ticket risolti in quel mese
 	    			String resDate;
 					resDate = issues.getJSONObject(i%1000).getJSONObject("fields")
 							.getString("resolutiondate").substring(0,16);
-				
 					LocalDateTime dateTime = LocalDateTime.parse(resDate);
 					ticketPerMonthCounter[dateTime.getYear()-2013][dateTime.getMonthValue()-1] ++;
 	    		}
