@@ -7,8 +7,10 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
+import org.eclipse.jgit.lib.RepositoryCache;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.util.FS;
 
 public class GitHandler 
 {
@@ -55,23 +57,28 @@ public class GitHandler
 		} 
 		catch (IOException | GitAPIException e) 
 		{
+			System.out.println("Error during comparison between Jyra and commits.");
 			e.printStackTrace();
 		}
 		return date;
 	}
 	
-	//Questo metodo serve a creare la repository di Falcon nella cartella di lavoro per
-	//controllare eventuali difformità sulle date dei commit e quelle di Gyra.
+	//Questo metodo serve a creare la repository locale di Falcon (qualora non esistesse ancora) 
+	//nella cartella di lavoro per controllare eventuali difformità sulle date dei commit e quelle di Jyra.
 	public static void cloneRepository(String local_path, String url)
 	{
 		try 
-		{
-				System.out.println("Creazione di una copia locale della repository di Falcon...");
+		{		
+			if (!RepositoryCache.FileKey.isGitRepository(new File(local_path+"/.git"), FS.DETECTED)) 
+			{
+				System.out.println("Creating a Falcon local repository...");
 				Git.cloneRepository().setURI(url).setDirectory(new File(local_path)).call();
-				System.out.println("Copia creata con successo.");
+				System.out.println("Copy done successfully.");
+			} 
 		} 
 		catch (GitAPIException e) 
 		{
+			System.out.println("Error in Git services.");
 			e.printStackTrace();
 		} 
 	}

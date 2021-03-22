@@ -16,7 +16,11 @@ public class TicketInfoGetter
 {
 	public static Integer[][] getInfo(String projName)
 	{		
-	    Integer j = 0, i = 0, total = 1, r, c;
+	    Integer j = 0; 
+	    Integer i = 0;
+	    Integer total = 1;
+	    Integer r;
+	    Integer c;
 	    Integer ticketPerMonthCounter[][] = new Integer[6][12];
 	    GitHandler dateModifier = new GitHandler();
 	    Integer[] dateVect= {0,0};
@@ -88,7 +92,6 @@ public class TicketInfoGetter
 	    	{
 	    		System.out.print(m[i][j]+"\t");
 	    	}
-	    	System.out.println("");
 	    	k++;
 	    }
 	}
