@@ -12,14 +12,13 @@ public class IssueCounter
 	    String[] months= {"January","February","March","April","May","June","July",
 	    		"August","September","October","November","Decembrer"};
 	    String[] years= {"2013","2014","2015","2016","2017","2018"};
-		
 		//Ottieni una matrice contenente i fixed tickets per mese
 	    Integer data[][]=TicketInfoGetter.getInfo(project_name);
 		FileWriter fileWriter = null;
 		try 
 		{
 			fileWriter = null;
-		    String outname = csv_path +"Project"+project_name+"TicketDatasNEWCHECK.csv";
+		    String outname = csv_path +"Project"+project_name+"TicketDatas.csv";
 		    fileWriter = new FileWriter(outname);
 		    //Scrivo il file CSV, riportando i mesi ed il numero di ticket risolti
 		    fileWriter.append("Months;Fixed tickets\n");
