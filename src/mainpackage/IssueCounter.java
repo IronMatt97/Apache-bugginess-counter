@@ -10,7 +10,7 @@ public class IssueCounter
 	public static void generateCSV(String projectName,String csvPath, Boolean checkDifference)
 	{
 	    String[] months= {"January","February","March","April","May","June","July",
-	    		"August","September","October","November","Decembrer"};
+	    		"August","September","October","November","December"};
 	    String[] years= {"2013","2014","2015","2016","2017","2018"};
 	    String outname;
 		
