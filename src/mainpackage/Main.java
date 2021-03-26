@@ -14,7 +14,7 @@ public class Main
 		// fra i ticket presenti su Jyra ed ogni singolo commit del progetto Falcon. 
 		// Mettere true o false quindi genera due csv differenti, uno che considera 
 		// questa differenza ed uno che invece considera solo i ticket di Jyra direttamente.
-		Boolean checkDifference = false;
+		Boolean checkDifference = true;
 		
 		GitHandler.cloneRepository(gitLocalRepositoryDest,gitHubRepositoryURL);
 		IssueCounter.generateCSV(projectName,csvPath,checkDifference);

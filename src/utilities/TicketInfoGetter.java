@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -14,6 +16,11 @@ import org.json.JSONObject;
 
 public class TicketInfoGetter 
 {
+	private static Logger logger =  Logger.getLogger(TicketInfoGetter.class.getName());
+	private TicketInfoGetter() 
+	{
+	    throw new IllegalStateException("Utility class");
+	}
 	public static Integer[][] getInfo(String projName, Boolean checkDifference)
 	{		
 	    Integer j = 0; 
@@ -21,9 +28,10 @@ public class TicketInfoGetter
 	    Integer total = 1;
 	    Integer r;
 	    Integer c;
-	    Integer ticketPerMonthCounter[][] = new Integer[6][12];
+	    Integer[][] ticketPerMonthCounter = new Integer[6][12];
 	    GitHandler dateModifier = new GitHandler();
 	    Integer[] dateVect= {0,0};
+	    
 	    //Inizializzo i  contatori dei ticket nella matrice, tutti a 0.
 	    for(r=0;r<6;r++) 
 	    {
@@ -48,7 +56,8 @@ public class TicketInfoGetter
 	    		{
 					//Preleva dal JSON la resolution date del ticket, trasformala in formato data
 					//per poi sommare uno al contatore dei ticket risolti in quel mese
-	    			String resDate,key;
+	    			String resDate;
+	    			String key;
 					resDate = issues.getJSONObject(i%1000).getJSONObject("fields")
 							.getString("resolutiondate").substring(0,16);
 					key = issues.getJSONObject(i%1000).get("key").toString();
@@ -58,43 +67,20 @@ public class TicketInfoGetter
 	    			//Il metodo che chiamo qui serve a controllare difformità tra JYRA e i commit.
 	    			//In caso la data di risoluzione di Gyra differisce da quella riportata nei
 	    			//commit, viene scelta la più recente.
-	    			if(checkDifference)
+	    			if(Boolean.TRUE.equals(checkDifference))
 	    				dateVect = dateModifier.checkDateValidity(dateVect,key);
 					ticketPerMonthCounter[dateVect[1]-2013][dateVect[0]-1] ++;
 	    		}
 	    	} 
-	    	catch (JSONException e) 
+	    	catch (JSONException | IOException e) 
 	    	{
-				System.out.println("Error during JSON document analysis.");
+	    		logger.log(Level.SEVERE,"An error has occurred during JSON document analysis");
 				e.printStackTrace();
 			} 
-	    	catch (IOException e) 
-	    	{
-	    		System.out.println("Error reading JSON file.");
-				e.printStackTrace();
-			}
 	    } 
 	    while (i < total);
-	    
-	    printMat(ticketPerMonthCounter);
-	    
+	    logger.log(Level.INFO,"Ticket counted correctly. Check in folder 'csv' to see the result.");
 	    return ticketPerMonthCounter;
-	}
-	
-	private static void printMat(Integer[][] m)
-	{
-		System.out.println("\n\n\t\t\t\t\t   Fixed issues per month\n");
-	    System.out.println("\t\tJan\tFeb\tMar\tApr\tMay\tJun\tJul\tAug\tSep\tOct\tNov\tDec");
-	    int k=0;
-	    for(int i=0;i<6;i++) 
-	    {
-	    	System.out.print("\nYear "+(k+2013)+"\t");
-	    	for(int j=0;j<12;j++)
-	    	{
-	    		System.out.print(m[i][j]+"\t");
-	    	}
-	    	k++;
-	    }
 	}
 
 	private static String readAll(Reader rd) throws IOException 
@@ -110,17 +96,11 @@ public class TicketInfoGetter
 
 	private static JSONObject readJsonFromUrl(String url) throws IOException, JSONException 
 	{
-		InputStream is = new URL(url).openStream();
-		try 
+		try (InputStream is = new URL(url).openStream();)
 		{
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8.name()));
 			String jsonText = readAll(rd);
-			JSONObject json = new JSONObject(jsonText);
-			return json;
+			return new JSONObject(jsonText);
 		} 
-		finally 
-		{
-			is.close();
-		}
 	}
 }

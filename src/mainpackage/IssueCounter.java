@@ -1,33 +1,36 @@
 package mainpackage;
 
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilities.TicketInfoGetter;
 
 public class IssueCounter 
 {
+	private static Logger logger = Logger.getLogger(IssueCounter.class.getName());
+	private IssueCounter() 
+	{
+	    throw new IllegalStateException("Utility class");
+	}
+	
 	//Metodo che restituisce il CSV da cui poi realizzare il process control chart.
 	public static void generateCSV(String projectName,String csvPath, Boolean checkDifference)
 	{
 	    String[] months= {"January","February","March","April","May","June","July",
 	    		"August","September","October","November","December"};
 	    String[] years= {"2013","2014","2015","2016","2017","2018"};
+	    
 	    String outname;
+	    if (Boolean.TRUE.equals(checkDifference))
+	    	outname = csvPath +"Project"+projectName+"ComparedTicketDatas.csv";
+	    else
+	    	outname = csvPath +"Project"+projectName+"JyraTicketDatas.csv";
 		
 		//Ottieni una matrice contenente i fixed tickets per mese
-	    Integer data[][]=TicketInfoGetter.getInfo(projectName,checkDifference);
-		FileWriter fileWriter = null;
-		try 
-		{
-			fileWriter = null;
-			
-		    if (checkDifference)
-		    	outname = csvPath +"Project"+projectName+"ComparedTicketDatas.csv";
-		    else
-		    	outname = csvPath +"Project"+projectName+"JyraTicketDatas.csv";
-		    
-		    fileWriter = new FileWriter(outname);
-		    
+	    Integer[][] data=TicketInfoGetter.getInfo(projectName,checkDifference);
+	    
+		try (FileWriter fileWriter = new FileWriter(outname)) 
+		{	
 		    //Scrivo il file CSV, riportando i mesi ed il numero di ticket risolti
 		    fileWriter.append("Months;Fixed tickets\n");
 		    for ( int r = 0; r < 6; r++) 
@@ -40,21 +43,8 @@ public class IssueCounter
 		} 
 		catch (Exception e) 
 		{
-			System.out.println("Error in CSV writer.");
+			logger.log(Level.SEVERE,"CSV writer encountered a problem.");
 		    e.printStackTrace();
 		} 
-		finally 
-		{
-		    try 
-		    {
-		        fileWriter.flush();
-		        fileWriter.close();
-		    } 
-		    catch (IOException e) 
-		    {
-		        System.out.println("Error while flushing/closing fileWriter.");
-		        e.printStackTrace();
-		    }
-		}
 	}
 }
