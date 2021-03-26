@@ -1,0 +1,53 @@
+
+Futilities.TicketInfoGetter#readAll(Ljava/io/Reader;)Ljava/lang/String;^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javac c("4*Ý
+2^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javai i(òï
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javai i(
+%3java.lang.StringBuilder":java.lang.StringBuilder#append(C)Ljava/lang/StringBuilder;*
+
+sbjava.lang.StringBuilder*
+""2	append(C)*
+3*”
+3^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javag g(¦£
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javag g(	
+%2int"java.io.Reader#read()I*
+
+rdjava.io.Reader2read()*
+2
+1*â
+4^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javae e((›˜
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javae e(&
+%0java.lang.StringBuilder"java.lang.StringBuilder­
+ª
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javae e((
+%1"!java.lang.StringBuilder#<init>()V*
+
+%0java.lang.StringBuilder©
+¦
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javae e()
+sbjava.lang.StringBuilder"__id*
+
+%0java.lang.StringBuilder*
+3*À
+1^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javak	 k(ÞÛ
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javak	 k(
+%4java.lang.String"4java.lang.StringBuilder#toString()Ljava/lang/String;*
+
+sbjava.lang.StringBuilder2
+toString()"z
+^
+T/home/matteo/eclipse-workspace/ISW2-Deliverable1/src/utilities/TicketInfoGetter.javak k(
+
+%4java.lang.String:
+rdjava.io.ReaderB"
+utilities.TicketInfoGetter

@@ -4,7 +4,7 @@ SonarCloud plugins:
   - Scala Code Quality and Security 1.8.2.1946 (sonarscala)
   - C# Code Quality and Security 8.20.0.28934 (csharp)
   - Vulnerability Analysis 8.7.0.7826 (security)
-  - Java Code Quality and Security 6.13.0.25138 (java)
+  - Java Code Quality and Security 6.14.0.25463 (java)
   - HTML Code Quality and Security 3.3.0.2534 (web)
   - Flex Code Quality and Security 2.6.0.2294 (flex)
   - XML Code Quality and Security 2.1.0.2861 (xml)
@@ -22,7 +22,7 @@ SonarCloud plugins:
   - Ruby Code Quality and Security 1.8.2.1946 (ruby)
   - Vulnerability Rules for C# 8.7.0.7826 (securitycsharpfrontend)
   - Vulnerability Rules for Java 8.7.0.7826 (securityjavafrontend)
-  - License for SonarLint 8.0.0.18399 (license)
+  - License for SonarLint 8.0.0.18488 (license)
   - Vulnerability Rules for JS 8.7.0.7826 (securityjsfrontend)
   - COBOL Code Quality 4.6.1.4781 (cobol)
   - Vulnerability Rules for Python 8.7.0.7826 (securitypythonfrontend)
@@ -44,7 +44,7 @@ Global server settings:
   - sonar.auth.microsoft.enabled=true
   - sonar.core.id=1BD809FA-AWHW8ct9-T_TB3XqouNu
   - sonar.core.serverBaseURL=https://sonarcloud.io
-  - sonar.core.startTime=2021-03-19T11:27:11+0100
+  - sonar.core.startTime=2021-03-22T11:33:26+0100
   - sonar.dbcleaner.weeksBeforeDeletingAllSnapshots=480
   - sonar.dbcleaner.weeksBeforeKeepingOnlyOneSnapshotByMonth=4
   - sonar.dbcleaner.weeksBeforeKeepingOnlyOneSnapshotByWeek=1

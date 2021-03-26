@@ -39,13 +39,13 @@ public class GitHandler
 						//Ottengo il mese e l'anno dei commit con il ticket cercato
 						Integer m = commit.getAuthorIdent().getWhen().getMonth()+1;
 						Integer y = commit.getAuthorIdent().getWhen().getYear()+1900;
-						System.out.println("Controllo difformità del ticket: "+key);
+						System.out.println("Checking differences in the resolution date between Jyra and commit for ticket: "+key);
+						//Sostituisci la data solo se ne trovi una più recente.
 						if ((date[1] < y) || (date[1]==y && date[0] < m))
 						{
-							System.out.println("DIFFORMITA' RISCONTRATA: E' stata cambiata la data del ticket "
-									+key+" da quella riportata su Gyra ("+date[0]+"/"+date[1]+
-									") a quella più recente riportata nell'ultimo commit relativo ("
-									+m+"/"+y+").");
+							System.out.println("DIFFERENCE FOUND: Ticket "+key+" 's resolution date has "
+									+ "been changed from the one reported on Jyra ("+date[0]+"/"+date[1]+
+									") to a more recent one reported in a newer commit ("+m+"/"+y+").");
 		    			
 							date[0]=m;
 							date[1]=y;
