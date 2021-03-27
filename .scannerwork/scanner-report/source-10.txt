@@ -1,53 +1,22 @@
 package mainpackage;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import utilities.TicketInfoGetter;
+import utilities.GitHandler;
 
-public class IssueCounter 
+public class Main 
 {
-	//Metodo che restituisce il CSV da cui poi realizzare il process control chart.
-	public static void generateCSV(String projectName,String csvPath)
+	public static void main(String[] args)
 	{
-	    String[] months= {"January","February","March","April","May","June","July",
-	    		"August","September","October","November","Decembrer"};
-	    String[] years= {"2013","2014","2015","2016","2017","2018"};
+		String projectName="FALCON";
+		String csvPath="/home/matteo/eclipse-workspace/ISW2-Deliverable1/csv/";
+		String gitLocalRepositoryDest = "/home/matteo/eclipse-workspace/ISW2-Deliverable1/FALCON_PROJECT";
+		String gitHubRepositoryURL ="https://github.com/apache/falcon.git";
+		// Se la variabile checkDifference viene impostata a true, verranno controllate le differenze 
+		// fra i ticket presenti su Jyra ed ogni singolo commit del progetto Falcon. 
+		// Mettere true o false quindi genera due csv differenti, uno che considera 
+		// questa differenza ed uno che invece considera solo i ticket di Jyra direttamente.
+		Boolean checkDifference = true;
 		
-		//Ottieni una matrice contenente i fixed tickets per mese
-	    Integer data[][]=TicketInfoGetter.getInfo(projectName);
-		FileWriter fileWriter = null;
-		try 
-		{
-			fileWriter = null;
-		    String outname = csvPath +"Project"+projectName+"TicketDatasNEWCHECK.csv";
-		    fileWriter = new FileWriter(outname);
-		    //Scrivo il file CSV, riportando i mesi ed il numero di ticket risolti
-		    fileWriter.append("Months;Fixed tickets\n");
-		    for ( int r = 0; r < 6; r++) 
-		    {
-		    	for (int c = 0; c < 12 ; c++)
-		    	{
-		    		fileWriter.append(months[c]+" "+years[r]+";"+data[r][c].toString()+"\n");
-		    	}
-		    }
-		} 
-		catch (Exception e) 
-		{
-			System.out.println("Error in CSV writer.");
-		    e.printStackTrace();
-		} 
-		finally 
-		{
-		    try 
-		    {
-		        fileWriter.flush();
-		        fileWriter.close();
-		    } 
-		    catch (IOException e) 
-		    {
-		        System.out.println("Error while flushing/closing fileWriter.");
-		        e.printStackTrace();
-		    }
-		}
+		GitHandler.cloneRepository(gitLocalRepositoryDest,gitHubRepositoryURL);
+		IssueCounter.generateCSV(projectName,csvPath,checkDifference);
 	}
 }

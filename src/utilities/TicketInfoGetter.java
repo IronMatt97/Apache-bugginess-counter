@@ -21,7 +21,7 @@ public class TicketInfoGetter
 	{
 	    throw new IllegalStateException("Utility class");
 	}
-	public static Integer[][] getInfo(String projName, Boolean checkDifference)
+	public static Integer[][] getInfo(String path, String projName, Boolean checkDifference)
 	{		
 	    Integer j = 0; 
 	    Integer i = 0;
@@ -68,14 +68,13 @@ public class TicketInfoGetter
 	    			//In caso la data di risoluzione di Gyra differisce da quella riportata nei
 	    			//commit, viene scelta la più recente.
 	    			if(Boolean.TRUE.equals(checkDifference))
-	    				dateVect = dateModifier.checkDateValidity(dateVect,key);
+	    				dateVect = dateModifier.checkDateValidity(path,dateVect,key);
 					ticketPerMonthCounter[dateVect[1]-2013][dateVect[0]-1] ++;
 	    		}
 	    	} 
 	    	catch (JSONException | IOException e) 
 	    	{
-	    		logger.log(Level.SEVERE,"An error has occurred during JSON document analysis");
-				e.printStackTrace();
+	    		logger.log(Level.INFO,"An error has occurred during JSON document analysis");
 			} 
 	    } 
 	    while (i < total);

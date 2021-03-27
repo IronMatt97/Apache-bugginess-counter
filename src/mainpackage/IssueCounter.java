@@ -14,7 +14,7 @@ public class IssueCounter
 	}
 	
 	//Metodo che restituisce il CSV da cui poi realizzare il process control chart.
-	public static void generateCSV(String projectName,String csvPath, Boolean checkDifference)
+	public static void generateCSV(String projectName,String csvPath,String locpath,Boolean checkDifference)
 	{
 	    String[] months= {"January","February","March","April","May","June","July",
 	    		"August","September","October","November","December"};
@@ -27,7 +27,7 @@ public class IssueCounter
 	    	outname = csvPath +"Project"+projectName+"JyraTicketDatas.csv";
 		
 		//Ottieni una matrice contenente i fixed tickets per mese
-	    Integer[][] data=TicketInfoGetter.getInfo(projectName,checkDifference);
+	    Integer[][] data=TicketInfoGetter.getInfo(locpath,projectName,checkDifference);
 	    
 		try (FileWriter fileWriter = new FileWriter(outname)) 
 		{	
@@ -43,8 +43,7 @@ public class IssueCounter
 		} 
 		catch (Exception e) 
 		{
-			logger.log(Level.SEVERE,"CSV writer encountered a problem.");
-		    e.printStackTrace();
+			logger.log(Level.INFO,"CSV writer encountered a problem.");
 		} 
 	}
 }

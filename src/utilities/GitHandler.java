@@ -19,9 +19,9 @@ public class GitHandler
 	private static Logger logger =  Logger.getLogger(GitHandler.class.getName());
 	//Questo metodo controlla la validità della data riportata su Jyra. Qualora differisse
 	//da quella riportata nei commit, viene selezionata la più recente.
-	public Integer[] checkDateValidity(Integer[] date, String key) 
+	public Integer[] checkDateValidity(String path, Integer[] date, String key) 
 	{
-		File gitDir = new File("/home/matteo/eclipse-workspace/ISW2-Deliverable1/FALCON_PROJECT/.git");
+		File gitDir = new File(path+"/.git");
 
 		RepositoryBuilder builder = new RepositoryBuilder();
 		Repository repository;
@@ -65,8 +65,7 @@ public class GitHandler
 		} 
 		catch (IOException | GitAPIException e) 
 		{
-			logger.log(Level.SEVERE,"Error during comparison between Jyra and commits.");
-			e.printStackTrace();
+			logger.log(Level.INFO,"Error during comparison between Jyra and commits.");
 		}
 		return date;
 	}
@@ -79,15 +78,14 @@ public class GitHandler
 		{		
 			if (!RepositoryCache.FileKey.isGitRepository(new File(localPath+"/.git"), FS.DETECTED)) 
 			{
-				logger.log(Level.FINE,"Creating a Falcon local repository...");
+				logger.log(Level.INFO,"Creating a Falcon local repository...");
 				Git.cloneRepository().setURI(url).setDirectory(new File(localPath)).call();
-				logger.log(Level.FINE,"Copy done successfully.");
+				logger.log(Level.INFO,"Copy done successfully.");
 			} 
 		} 
 		catch (GitAPIException e) 
 		{
-			logger.log(Level.SEVERE,"Error in Git services.");
-			e.printStackTrace();
+			logger.log(Level.INFO,"Error in Git services.");
 		} 
 	}
 	private Integer obtainMonthNumber(String s)
@@ -118,7 +116,7 @@ public class GitHandler
 			return 12;
 		else
 		{
-			logger.log(Level.WARNING,"Something went wrong reading months.");
+			logger.log(Level.INFO,"Something went wrong reading months.");
 			return -1;
 		}
 	}

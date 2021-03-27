@@ -1,1 +1,1 @@
- 2javaXUhrsrc/utilities/GitHandler.java
+ 2javaXjhr#src/utilities/TicketInfoGetter.java
