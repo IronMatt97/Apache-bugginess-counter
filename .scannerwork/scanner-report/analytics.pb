@@ -19,7 +19,7 @@
 
 msbuild_versionUnknown
  
-peak_used_heap_byte	123741568
+peak_used_heap_byte	144534584
 
 scanner_type
 ScannerCLI

@@ -23,4 +23,4 @@ Ho scelto di realizzare (tramite l'implementazione di un parametro booleano) il 
 
 
 
-Per maggiori informazioni, consultare il report del progetto all'interno della cartella del progetto.
+Per maggiori informazioni, consultare il report del progetto all'interno della cartella principale.

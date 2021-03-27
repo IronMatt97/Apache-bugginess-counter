@@ -90,34 +90,18 @@ public class GitHandler
 	}
 	private Integer obtainMonthNumber(String s)
 	{
-		if(s.equals("Jan"))
-			return 1;
-		else if(s.equals("Feb"))
-			return 2;
-		else if(s.equals("Mar"))
-			return 3;
-		else if(s.equals("Apr"))
-			return 4;
-		else if(s.equals("May"))
-			return 5;
-		else if(s.equals("Jun"))
-			return 6;
-		else if(s.equals("Jul"))
-			return 7;
-		else if(s.equals("Aug"))
-			return 8;
-		else if(s.equals("Sep"))
-			return 9;
-		else if(s.equals("Oct"))
-			return 10;
-		else if(s.equals("Nov"))
-			return 11;
-		else if(s.equals("Dec"))
-			return 12;
-		else
+		String[] months= {"January","February","March","April","May","June","July",
+	    		"August","September","October","November","December"};
+		for (int i = 0; i<12; i++)
 		{
-			logger.log(Level.INFO,"Something went wrong reading months.");
-			return -1;
+			if(s.equals(months[i].substring(0,3)))
+			{
+				return i+1;
+			}
 		}
+		
+		logger.log(Level.INFO,"Something went wrong reading months.");
+		return -1;
+		
 	}
 }
