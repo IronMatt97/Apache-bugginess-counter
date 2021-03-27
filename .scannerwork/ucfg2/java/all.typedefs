@@ -16,12 +16,12 @@ getClass(),java.lang.Object#getClass()Ljava/lang/Class;5
 notifyAll()java.lang.Object#notifyAll()V"
 wait()java.lang.Object#wait()V*
 
-hashCode()java.lang.Object#hashCode()Iı
+hashCode()java.lang.Object#hashCode()Iô
 utilities.GitHandlerjava.lang.Objectv
 %obtainMonthNumber(Ljava/lang/String;)Mutilities.GitHandler#obtainMonthNumber(Ljava/lang/String;)Ljava/lang/Integer;*
 <init>()utilities.GitHandler#<init>()VÑ
-5cloneRepository(Ljava/lang/String;Ljava/lang/String;)Kutilities.GitHandler#cloneRepository(Ljava/lang/String;Ljava/lang/String;)Vü
-9checkDateValidity([Ljava/lang/Integer;Ljava/lang/String;)butilities.GitHandler#checkDateValidity([Ljava/lang/Integer;Ljava/lang/String;)[Ljava/lang/Integer;(
+5cloneRepository(Ljava/lang/String;Ljava/lang/String;)Kutilities.GitHandler#cloneRepository(Ljava/lang/String;Ljava/lang/String;)V√
+KcheckDateValidity(Ljava/lang/String;[Ljava/lang/Integer;Ljava/lang/String;)tutilities.GitHandler#checkDateValidity(Ljava/lang/String;[Ljava/lang/Integer;Ljava/lang/String;)[Ljava/lang/Integer;(
 java.io.Serializablejava.lang.Object(
 java.lang.Comparablejava.lang.Object´
 java.io.Filejava.lang.Comparablejava.lang.Objectjava.io.Serializable&
@@ -373,9 +373,9 @@ valueOf(J)-java.lang.String#valueOf(J)Ljava/lang/String;2
 %regionMatches(ZILjava/lang/String;II)7java.lang.String#regionMatches(ZILjava/lang/String;II)Zñ
 mainpackage.Mainjava.lang.Object&
 <init>()mainpackage.Main#<init>()VH
-main([Ljava/lang/String;)+mainpackage.Main#main([Ljava/lang/String;)VÖ
-mainpackage.IssueCounterjava.lang.Object¶
-DgenerateCSV(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)^mainpackage.IssueCounter#generateCSV(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)V.
+main([Ljava/lang/String;)+mainpackage.Main#main([Ljava/lang/String;)V©
+mainpackage.IssueCounterjava.lang.Object 
+VgenerateCSV(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)pmainpackage.IssueCounter#generateCSV(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)V.
 <init>()"mainpackage.IssueCounter#<init>()V√
 java.lang.Throwablejava.lang.Objectjava.io.Serializable;
 printStackTrace()&java.lang.Throwable#printStackTrace()VZ
@@ -480,12 +480,12 @@ hashCode()java.lang.Boolean#hashCode()I3
 <init>(Ljava/lang/String;).java.io.FileWriter#<init>(Ljava/lang/String;)Vx
 0<init>(Ljava/io/File;Ljava/nio/charset/Charset;)Djava.io.FileWriter#<init>(Ljava/io/File;Ljava/nio/charset/Charset;)VÄ
 4<init>(Ljava/lang/String;Ljava/nio/charset/Charset;)Hjava.io.FileWriter#<init>(Ljava/lang/String;Ljava/nio/charset/Charset;)VX
- <init>(Ljava/io/FileDescriptor;)4java.io.FileWriter#<init>(Ljava/io/FileDescriptor;)VÀ
+ <init>(Ljava/io/FileDescriptor;)4java.io.FileWriter#<init>(Ljava/io/FileDescriptor;)VÔ
 utilities.TicketInfoGetterjava.lang.Objectc
 readAll(Ljava/io/Reader;)Futilities.TicketInfoGetter#readAll(Ljava/io/Reader;)Ljava/lang/String;0
 <init>()$utilities.TicketInfoGetter#<init>()Vq
-#readJsonFromUrl(Ljava/lang/String;)Jutilities.TicketInfoGetter#readJsonFromUrl(Ljava/lang/String;)LJSONObject;ê
-.getInfo(Ljava/lang/String;Ljava/lang/Boolean;)^utilities.TicketInfoGetter#getInfo(Ljava/lang/String;Ljava/lang/Boolean;)[[Ljava/lang/Integer;€
+#readJsonFromUrl(Ljava/lang/String;)Jutilities.TicketInfoGetter#readJsonFromUrl(Ljava/lang/String;)LJSONObject;¥
+@getInfo(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)putilities.TicketInfoGetter#getInfo(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)[[Ljava/lang/Integer;€
 #java.time.temporal.TemporalAccessorjava.lang.Objectå
 )query(Ljava/time/temporal/TemporalQuery;)_java.time.temporal.TemporalAccessor#query(Ljava/time/temporal/TemporalQuery;)Ljava/lang/Object;w
 'get(Ljava/time/temporal/TemporalField;)Ljava.time.temporal.TemporalAccessor#get(Ljava/time/temporal/TemporalField;)Iô

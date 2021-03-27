@@ -1,22 +1,49 @@
 package mainpackage;
 
-import utilities.GitHandler;
+import java.io.FileWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utilities.TicketInfoGetter;
 
-public class Main 
+public class IssueCounter 
 {
-	public static void main(String[] args)
+	private static Logger logger = Logger.getLogger(IssueCounter.class.getName());
+	private IssueCounter() 
 	{
-		String projectName="FALCON";
-		String csvPath="/home/matteo/eclipse-workspace/ISW2-Deliverable1/csv/";
-		String gitLocalRepositoryDest = "/home/matteo/eclipse-workspace/ISW2-Deliverable1/FALCON_PROJECT";
-		String gitHubRepositoryURL ="https://github.com/apache/falcon.git";
-		// Se la variabile checkDifference viene impostata a true, verranno controllate le differenze 
-		// fra i ticket presenti su Jyra ed ogni singolo commit del progetto Falcon. 
-		// Mettere true o false quindi genera due csv differenti, uno che considera 
-		// questa differenza ed uno che invece considera solo i ticket di Jyra direttamente.
-		Boolean checkDifference = true;
+	    throw new IllegalStateException("Utility class");
+	}
+	
+	//Metodo che restituisce il CSV da cui poi realizzare il process control chart.
+	public static void generateCSV(String projectName,String csvPath,String locpath,Boolean checkDifference)
+	{
+	    String[] months= {"January","February","March","April","May","June","July",
+	    		"August","September","October","November","December"};
+	    String[] years= {"2013","2014","2015","2016","2017","2018"};
+	    
+	    String outname;
+	    if (Boolean.TRUE.equals(checkDifference))
+	    	outname = csvPath +"Project"+projectName+"ComparedTicketDatas.csv";
+	    else
+	    	outname = csvPath +"Project"+projectName+"JyraTicketDatas.csv";
 		
-		GitHandler.cloneRepository(gitLocalRepositoryDest,gitHubRepositoryURL);
-		IssueCounter.generateCSV(projectName,csvPath,checkDifference);
+		//Ottieni una matrice contenente i fixed tickets per mese
+	    Integer[][] data=TicketInfoGetter.getInfo(locpath,projectName,checkDifference);
+	    
+		try (FileWriter fileWriter = new FileWriter(outname)) 
+		{	
+		    //Scrivo il file CSV, riportando i mesi ed il numero di ticket risolti
+		    fileWriter.append("Months;Fixed tickets\n");
+		    for ( int r = 0; r < 6; r++) 
+		    {
+		    	for (int c = 0; c < 12 ; c++)
+		    	{
+		    		fileWriter.append(months[c]+" "+years[r]+";"+data[r][c].toString()+"\n");
+		    	}
+		    }
+		} 
+		catch (Exception e) 
+		{
+			logger.log(Level.INFO,"CSV writer encountered a problem.");
+		} 
 	}
 }

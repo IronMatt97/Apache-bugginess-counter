@@ -1,2 +1,2 @@
 
- 2javaXhrsrc/mainpackage/Main.java
+ 2javaX1hr!src/mainpackage/IssueCounter.java
